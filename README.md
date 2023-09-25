@@ -34,7 +34,31 @@ cd trydjango
 python manage.py runserver
 
 ```
+## Other Useful Commands
 
+6. Migrate Database:
+```
+python manage.py migrate
+
+```
+7. Create Superuser:
+```
+ python manage.py createsuperuser
+
+```
+
+
+8. Create Component
+```
+python manage.py startapp componentName
+
+```
+
+9. New App migration 
+```
+python manage.py makemigrations
+
+```
 Access your project in a web browser at http://127.0.0.1:8000/.
 
 
