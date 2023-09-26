@@ -67,7 +67,7 @@ python manage.py shell
 #shell
 from products.models import Product
 Product.objects.all()
-Product.objects.all()
+Product.objects.create()
 
 ```
 

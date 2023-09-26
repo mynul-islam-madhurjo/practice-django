@@ -9,6 +9,7 @@ def hello_world(request, *args, **kwargs):
     # return HttpResponse("<html><body><h1>Hello, World!</h1></body></html>")
     my_conext = {
         'my_text': 'This is about us',
-        'my_number': 123
+        'my_number': 123,
+        'lists': [10,20,30]
     }
     return render(request, 'home.html', my_conext)

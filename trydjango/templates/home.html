@@ -12,4 +12,12 @@ Authentication {{request.user.is_authenticated}}
     {{ my_number }}
 </p>
 
+<ul>
+{% for list in lists %}
+<li>    {{forloop.counter}}.{{list}}</li>
+{% endfor %}
+
+</ul>
+
+
 {% endblock %}

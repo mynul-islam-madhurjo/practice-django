@@ -3,7 +3,7 @@ myenv/
 trydjango/db.sqlite3
 
 # Ignore other files and directories (add more as needed)
-trydjango/__pycache__/
+__pycache__/
 *.pyc
 *.pyo
 *.db
