@@ -1,10 +1,10 @@
 # Ignore virtual environment
 myenv/
+trydjango/db.sqlite3
 
 # Ignore other files and directories (add more as needed)
 __pycache__/
 *.pyc
 *.pyo
 *.db
-*.sqlite3
 *.log
