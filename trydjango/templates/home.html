@@ -13,10 +13,13 @@ Authentication {{request.user.is_authenticated}}
 </p>
 
 <ul>
-{% for list in lists %}
-<li>    {{forloop.counter}}.{{list}}</li>
-{% endfor %}
-
+    {% for list in lists %}
+    {% if list == 10 %}
+    <li> {{list|add:22}}</li>
+    {% else %}
+    <li> {{forloop.counter}}.{{list}}</li>
+    {% endif %}
+    {% endfor %}
 </ul>
 
 
