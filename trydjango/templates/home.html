@@ -8,8 +8,12 @@ Authentication {{request.user.is_authenticated}}
 
 <!-- Data Rendering -->
 <p>
-    {{ my_text }}
+    {{ my_text|title }}
     {{ my_number }}
+    {{ title|capfirst|upper}}
+    {{ comment|safe}}
+    {{ comment|striptags}}
+
 </p>
 
 <ul>

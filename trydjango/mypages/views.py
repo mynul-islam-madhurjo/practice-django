@@ -10,6 +10,8 @@ def hello_world(request, *args, **kwargs):
     my_conext = {
         'my_text': 'This is about us',
         'my_number': 123,
-        'lists': [10,20,30]
+        'lists': [10,20,30],
+        'title':'this is the title',
+        'comment': '<h1>This is a comment</h1>'
     }
     return render(request, 'home.html', my_conext)
