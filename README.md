@@ -59,6 +59,24 @@ python manage.py startapp componentName
 python manage.py makemigrations
 
 ```
+## Create Model Objects Commands
+
+10. Creating objects in shell
+```
+python manage.py shell 
+#shell
+from products.models import Product
+Product.objects.all()
+Product.objects.all()
+
+```
+
+10. New App migration 
+```
+python manage.py makemigrations
+
+```
+
 Access your project in a web browser at http://127.0.0.1:8000/.
 
 
