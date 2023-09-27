@@ -71,9 +71,12 @@ Product.objects.create()
 
 ```
 
-10. New App migration 
+11. Get a data from database with id 
 ```
-python manage.py makemigrations
+python manage.py shell 
+#shell
+from products.models import Product
+Product.objects.get(id=1)
 
 ```
 
