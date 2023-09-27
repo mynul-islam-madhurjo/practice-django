@@ -23,7 +23,7 @@ myenv\Scripts\activate    # On Windows
 ```
 3. Install Django:
 ```
-pip install django==2.0.7
+pip install django==2.1.5
 ```
 4. Navigate to the project directory:
 ```

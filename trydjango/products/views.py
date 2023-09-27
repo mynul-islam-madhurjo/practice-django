@@ -8,4 +8,4 @@ def show_product(request):
 
     obj = Product.objects.get(id=1)
     context = {'product': obj}
-    return render(request,'view.html', context)
+    return render(request,'products/product_view.html', context)
