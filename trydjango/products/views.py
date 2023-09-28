@@ -28,12 +28,28 @@ from .forms import ProductForm, RawProductForm
 #     }
 #     return render(request, 'create.html', context)
 
+# def create_product(request):
+#     form = ProductForm(request.POST or None)
+#     if form.is_valid():
+#         form.save()
+#         # clear the form
+#         form = ProductForm
+#
+#     context = {
+#         'form': form
+#     }
+#     return render(request, 'create.html', context)
+
+
+# Creating initial values for forms
 def create_product(request):
-    form = ProductForm(request.POST or None)
+    initial_data = {
+        'title': 'My awesome title'
+    }
+    obj = Product.objects.get(id=1)
+    form = ProductForm(request.POST or None, instance=obj)
     if form.is_valid():
         form.save()
-        # clear the form
-        form = ProductForm
 
     context = {
         'form': form
