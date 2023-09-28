@@ -6,8 +6,8 @@ Product create Template
 <!--we use get for url search-->
 <form method="post" >
     {% csrf_token %}
-<!--    {{ form.as_p}}-->
-    <input type="text" name="title" placeholder="Please Enter Title in here">
+    {{ form.as_p}}
+<!--    <input type="text" name="title" placeholder="Please Enter Title in here">-->
 
     <input type="submit" value="Save">
 </form>
