@@ -61,3 +61,9 @@ def show_product(request):
     obj = Product.objects.get(id=1)
     context = {'product': obj}
     return render(request, 'products/product_view.html', context)
+
+
+def show_product_details(request, my_id):
+    obj = Product.objects.get(id=my_id)
+    context = {'product': obj}
+    return render(request, 'view.html', context)
