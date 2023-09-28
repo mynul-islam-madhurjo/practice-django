@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http import Http404
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Product
 
@@ -64,6 +65,12 @@ def show_product(request):
 
 
 def show_product_details(request, my_id):
-    obj = Product.objects.get(id=my_id)
+    # obj = Product.objects.get(id=my_id)
+    # obj = get_object_or_404(Product,id=my_id)
+    try:
+        obj = Product.objects.get(id=my_id)
+    except Product.DoesNotExist:
+        raise Http404
+
     context = {'product': obj}
     return render(request, 'view.html', context)
