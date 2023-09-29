@@ -86,3 +86,11 @@ def delete_product(request, id):
 
     return render(request, 'delete.html', context)
 
+def product_list(request):
+    queryset = Product.objects.all()
+    context = {
+        'list': queryset
+    }
+
+    return render(request,'list.html',context)
+
