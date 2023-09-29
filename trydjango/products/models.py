@@ -10,3 +10,6 @@ class Product(models.Model):
 
     # Adding new field
     features = models.BooleanField(null=True)  # default='Empty'
+
+    def get_absolute_url(self):
+        return f"/products/product/{self.id}"
