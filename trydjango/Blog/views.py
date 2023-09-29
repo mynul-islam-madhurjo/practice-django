@@ -28,6 +28,23 @@ class BlogCreateView(CreateView):
     def get_success_url(self):
         return '/'
 
+
+class BlogUpdateView(UpdateView):
+    template_name = 'Blog/blog_create.html'
+    form_class = BlogForm
+    queryset = Blog.objects.all()
+
+    # if we want to define a landing pager after success
+    # success_url = '/'
+    def get_object(self):
+        id_ = self.kwargs.get('id')
+        return get_object_or_404(Blog, id=id_)
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
+
+
 class BlogListView(ListView):
     # template_name = 'random/random_list.html'
     queryset = Blog.objects.all()
