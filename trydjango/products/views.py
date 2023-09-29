@@ -1,6 +1,6 @@
 from django.http import Http404
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse,HttpResponseRedirect
 from .models import Product
 
 from .forms import ProductForm, RawProductForm
@@ -74,3 +74,15 @@ def show_product_details(request, my_id):
 
     context = {'product': obj}
     return render(request, 'view.html', context)
+
+def delete_product(request, id):
+    obj = get_object_or_404(Product,id=id)
+    if request.method == 'POST':
+        obj.delete()
+        return HttpResponseRedirect('/product/')
+    context = {
+        'object': obj
+    }
+
+    return render(request, 'delete.html', context)
+
