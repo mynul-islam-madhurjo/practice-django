@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 
 from django.views.generic import (
     CreateView,
@@ -59,3 +60,14 @@ class BlogDetailView(DetailView):
     def get_object(self):
         id_ = self.kwargs.get('id')
         return get_object_or_404(Blog, id=id_)
+
+class BlogDeleteView(DeleteView):
+    template_name = 'Blog/blog_delete.html'
+    # if we want to pass with  pk
+    # queryset = Blog.objects.all()
+    def get_object(self):
+        id_ = self.kwargs.get('id')
+        return get_object_or_404(Blog, id=id_)
+
+    def get_success_url(self):
+        return reverse('blogs:show-blogs')
