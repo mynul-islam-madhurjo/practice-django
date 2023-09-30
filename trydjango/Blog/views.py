@@ -76,6 +76,16 @@ class BlogDeleteView(DeleteView):
         return reverse('blogs:show-blogs')
 
 
+# Custom Mixin for Class Based Views
+class BlogObjectMixin(object):
+    model = Blog
+    lookup = 'id'
+    def get_object(self):
+        id = self.kwargs.get(self.lookup)
+        if id is not None:
+            obj = get_object_or_404(self.model, id=id)
+        return obj
+
 # Function Based View to Class based View
 
 class BlogListView(View):
@@ -116,6 +126,7 @@ class BlogCreateView(View):
             'form': form
         }
         return render(request, self.template_name, context)
+
     def post(self, request, *args, **kwargs):
         form = BlogForm(request.POST)
         if form.is_valid():
@@ -126,13 +137,9 @@ class BlogCreateView(View):
         }
         return render(request, self.template_name, context)
 
-    class BlogUpdateView(View):
+    class BlogUpdateView(BlogObjectMixin, View):
         template_name = ''
-        def get_object(self):
-            id = self.kwargs.get('id')
-            if id is not None:
-                obj = get_object_or_404(Blog, id=id)
-            return obj
+
         def get(self, request, id=None, *args, **kwargs):
             context = {}
             obj = self.get_object()
@@ -148,7 +155,7 @@ class BlogCreateView(View):
             context = {}
             obj = self.get_object()
             if obj is not None:
-                form = BlogForm(request.POST,instance=obj)
+                form = BlogForm(request.POST, instance=obj)
                 if form.is_valid():
                     form.save()
                     form = BlogForm()
@@ -157,15 +164,8 @@ class BlogCreateView(View):
             }
             return render(request, self.template_name, context)
 
-    class BlogDeleteView(View):
+    class BlogDeleteView(BlogObjectMixin, View):
         template_name = ''
-
-        def get_object(self):
-            id = self.kwargs.get('id')
-            obj = None
-            if id is not None:
-                obj = get_object_or_404(Blog, id=id)
-            return obj
 
         def get(self, request, id=None, *args, **kwargs):
             context = {}
