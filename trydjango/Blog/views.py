@@ -105,3 +105,22 @@ class BlogView(View):
             obj = get_object_or_404(Blog, id=id)
             context['object'] = obj
         return render(request, self.template_name, context)
+
+
+class BlogCreateView(View):
+    template_name = ''
+
+    def get(self, request, *args, **kwargs):
+        form = BlogForm
+        context = {
+            'form': form
+        }
+        return render(request, self.template_name, context)
+    def post(self, request, *args, **kwargs):
+        form = BlogForm(request.POST)
+        if form.is_valid():
+            form.save()
+        context = {
+            'form': form
+        }
+        return render(request, self.template_name, context)

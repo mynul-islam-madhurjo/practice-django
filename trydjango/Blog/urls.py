@@ -13,6 +13,7 @@ urlpatterns = [
 
     # Function Based View to Class based View
     path('', views.BlogListView.as_view(template_name='Blog/blog_list.html'), name='blogs-list'),
+    path('create/', views.BlogCreateView.as_view(template_name='Blog/blog_create.html'), name='blogs-create'),
     path('<int:id>', views.BlogView.as_view(template_name='Blog/blog_detail.html'), name='blogs-detail'),
 
     path('filter', views.MyListView.as_view(template_name='Blog/blog_list.html'), name='blogs-list'),
