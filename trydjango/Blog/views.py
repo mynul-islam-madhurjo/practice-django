@@ -125,3 +125,34 @@ class BlogCreateView(View):
             'form': form
         }
         return render(request, self.template_name, context)
+
+    class BlogUpdateView(View):
+        template_name = ''
+        def get_object(self):
+            id = self.kwargs.get('id')
+            if id is not None:
+                obj = get_object_or_404(Blog, id=id)
+            return obj
+        def get(self, request, id=None, *args, **kwargs):
+            context = {}
+            obj = self.get_object()
+            if obj is not None:
+                form = BlogForm(instance=obj)
+                context = {
+                    'object': obj,
+                    'form': form
+                }
+            return render(request, self.template_name, context)
+
+        def post(self, request, *args, **kwargs):
+            context = {}
+            obj = self.get_object()
+            if obj is not None:
+                form = BlogForm(request.POST,instance=obj)
+                if form.is_valid():
+                    form.save()
+                    form = BlogForm()
+            context = {
+                'form': form
+            }
+            return render(request, self.template_name, context)
