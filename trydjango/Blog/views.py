@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views import View
 
@@ -155,4 +155,34 @@ class BlogCreateView(View):
             context = {
                 'form': form
             }
+            return render(request, self.template_name, context)
+
+    class BlogDeleteView(View):
+        template_name = ''
+
+        def get_object(self):
+            id = self.kwargs.get('id')
+            obj = None
+            if id is not None:
+                obj = get_object_or_404(Blog, id=id)
+            return obj
+
+        def get(self, request, id=None, *args, **kwargs):
+            context = {}
+            obj = self.get_object()
+            if obj is not None:
+                context = {
+                    'object': obj,
+                }
+            return render(request, self.template_name, context)
+
+        def post(self, request, *args, **kwargs):
+            context = {}
+            obj = self.get_object()
+            if obj is not None:
+                obj.delete()
+                context = {
+                    'object': None
+                }
+                return redirect('/Blogs/')
             return render(request, self.template_name, context)
