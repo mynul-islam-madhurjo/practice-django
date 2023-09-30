@@ -1,1 +1,5 @@
-This is try
+{% for instance in object_list %}
+<!--<p> {{ instance.id }} - <a href="/products/product/{{ instance.id }}"> {{ instance.title}}</a></p>-->
+<p> {{ instance.id }} - {{ instance.title}}</p>
+
+{% endfor %}

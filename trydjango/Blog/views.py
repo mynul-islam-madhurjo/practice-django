@@ -78,12 +78,30 @@ class BlogDeleteView(DeleteView):
 
 # Function Based View to Class based View
 
+class BlogListView(View):
+    template_name = ''
+    queryset = Blog.objects.all()
+
+    def get_queryset(self):
+        return self.queryset
+
+    def get(self, request, *args, **kwargs):
+        context = {
+            'object_list': self.get_queryset
+        }
+        return render(request, self.template_name, context)
+
+
+class MyListView(BlogListView):
+    queryset = Blog.objects.filter(id=1)
+
+
 class BlogView(View):
     template_name = ''
 
     def get(self, request, id=None, *args, **kwargs):
         context = {}
         if id is not None:
-            obj = get_object_or_404(Blog,id=id)
+            obj = get_object_or_404(Blog, id=id)
             context['object'] = obj
         return render(request, self.template_name, context)
