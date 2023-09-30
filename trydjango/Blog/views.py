@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.views import View
 
 from django.views.generic import (
     CreateView,
@@ -71,3 +72,11 @@ class BlogDeleteView(DeleteView):
 
     def get_success_url(self):
         return reverse('blogs:show-blogs')
+
+
+# Function Based View to Class based View
+
+class BlogView(View):
+    template_name = ''
+    def get(self,request,*args,**kwargs):
+        return render(request,self.template_name,{})
