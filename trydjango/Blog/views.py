@@ -111,7 +111,7 @@ class BlogCreateView(View):
     template_name = ''
 
     def get(self, request, *args, **kwargs):
-        form = BlogForm
+        form = BlogForm()
         context = {
             'form': form
         }
@@ -120,6 +120,7 @@ class BlogCreateView(View):
         form = BlogForm(request.POST)
         if form.is_valid():
             form.save()
+            form = BlogForm()
         context = {
             'form': form
         }
