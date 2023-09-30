@@ -62,8 +62,10 @@ class BlogDetailView(DetailView):
         id_ = self.kwargs.get('id')
         return get_object_or_404(Blog, id=id_)
 
+
 class BlogDeleteView(DeleteView):
     template_name = 'Blog/blog_delete.html'
+
     # if we want to pass with  pk
     # queryset = Blog.objects.all()
     def get_object(self):
@@ -78,5 +80,10 @@ class BlogDeleteView(DeleteView):
 
 class BlogView(View):
     template_name = ''
-    def get(self,request,*args,**kwargs):
-        return render(request,self.template_name,{})
+
+    def get(self, request, id=None, *args, **kwargs):
+        context = {}
+        if id is not None:
+            obj = get_object_or_404(Blog,id=id)
+            context['object'] = obj
+        return render(request, self.template_name, context)
