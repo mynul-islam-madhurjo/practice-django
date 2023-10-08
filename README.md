@@ -11,8 +11,5 @@ django-admin startproject mynewproject .
 ```
 # Create Python API Client 
 
-```
-django-admin startproject mynewproject .
-```
 
 
