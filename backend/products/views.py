@@ -5,6 +5,10 @@ from django.http import JsonResponse, HttpResponse  # JsonResponse expects dicti
 from .models import Product
 from django.forms.models import model_to_dict
 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+
 # Create your views here.
 
 """ 
@@ -26,3 +30,31 @@ def get_product(request, *args, **kwargs):
         data = model_to_dict(model_data, fields=['title'])
 
     return JsonResponse(data)
+
+
+""" 
+DRF API VIEW
+"""
+
+
+@api_view(["GET"])
+def get_product_rest(request, *args, **kwargs):
+    model_data = Product.objects.all().order_by('?').first()
+    data = {}
+
+    if model_data:
+        data = model_to_dict(model_data, fields=['title'])
+        return Response(data, status=status.HTTP_200_OK)
+    else:
+        return Response({"message": "No data available"}, status=status.HTTP_404_NOT_FOUND)
+
+
+
+
+
+
+
+
+
+
+
