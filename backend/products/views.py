@@ -3,6 +3,7 @@ import json
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse  # JsonResponse expects dictionary, HttpResponse String text
 from .models import Product
+from .serializers import ProductSerializer
 from django.forms.models import model_to_dict
 
 from rest_framework.decorators import api_view
@@ -43,10 +44,34 @@ def get_product_rest(request, *args, **kwargs):
     data = {}
 
     if model_data:
-        data = model_to_dict(model_data, fields=['title'])
+        # sale_price wont show
+        data = model_to_dict(model_data, fields=['title', 'sale_price'])
         return Response(data, status=status.HTTP_200_OK)
     else:
         return Response({"message": "No data available"}, status=status.HTTP_404_NOT_FOUND)
+
+
+""" 
+DRF Serializer
+"""
+
+
+@api_view(["GET"])
+def get_product_rest_srlz(request, *args, **kwargs):
+    instance = Product.objects.all().order_by('?').first()
+    data = {}
+
+    if instance:
+        # sale_price wont show
+        data = ProductSerializer(instance).data
+        return Response(data, status=status.HTTP_200_OK)
+    else:
+        return Response({"message": "No data available"}, status=status.HTTP_404_NOT_FOUND)
+
+
+
+
+
 
 
 
