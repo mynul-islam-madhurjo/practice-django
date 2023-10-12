@@ -52,7 +52,7 @@ def get_product_rest(request, *args, **kwargs):
 
 
 """ 
-DRF Serializer
+DRF Serializer Get
 """
 
 
@@ -69,11 +69,21 @@ def get_product_rest_srlz(request, *args, **kwargs):
         return Response({"message": "No data available"}, status=status.HTTP_404_NOT_FOUND)
 
 
+""" 
+DRF Serializer Post
+"""
 
 
+@api_view(["POST"])
+def get_product_rest_srlz_post(request, *args, **kwargs):
+    # request.POST/request.data
+    serializer = ProductSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        instance = serializer.save()
+        print(instance)
+        return Response(serializer.data)
 
-
-
+    return Response({"invalid": "not good data"}, status=400)
 
 
 

@@ -1,12 +1,21 @@
 import requests
 
-endpoint = 'http://localhost:8000/products'
+# Get
+# endpoint = 'http://localhost:8000/products'
 
-get_response = requests.get(endpoint)
+# Post
+endpoint = 'http://localhost:8000/products/'
+
+# Get
+# get_response = requests.get(endpoint)
 # get_response = requests.get(endpoint, params={"abc": 123}, json={'query': 'Hello'})
+
+# Post
+get_response = requests.post(endpoint, json={'title': 'New title'})
 
 # print(get_response.text)
 # print(get_response.status_code)
+
 print(get_response.json())
 
 
